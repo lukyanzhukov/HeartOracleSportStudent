@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "201431914508",
+    "firebase_url": "https://heartoracle-sport.firebaseio.com",
+    "project_id": "heartoracle-sport",
+    "storage_bucket": "heartoracle-sport.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:201431914508:android:78d80ff0a37bb9a522b629",
+        "android_client_info": {
+          "package_name": "com.heartoracle.sport.student"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "201431914508-ebkhmkc99jtfh6me30pfaqv6dkmm1kvr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.heartoracle.sport.student",
+            "certificate_hash": "2f86a6e4309d497ca0530b9075f67c63e8313b27"
+          }
+        },
+        {
+          "client_id": "201431914508-p7tnkq5ninivqf6sovrpd23fupugan4s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDc02v2-Esh2QMqaQ0Zi8DqrREhRm-yCBk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "201431914508-p7tnkq5ninivqf6sovrpd23fupugan4s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
