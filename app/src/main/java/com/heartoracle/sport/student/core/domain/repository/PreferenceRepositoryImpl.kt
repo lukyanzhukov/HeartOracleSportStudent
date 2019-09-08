@@ -1,24 +1,15 @@
 package com.heartoracle.sport.student.core.domain.repository
 
-import com.heartoracle.sport.student.core.data.PreferenceDataSource
-import java.lang.Exception
+import com.heartoracle.sport.student.core.data.DataSource
 import javax.inject.Inject
 
-class PreferenceRepositoryImpl @Inject constructor(private val dataSource: PreferenceDataSource) :
+class PreferenceRepositoryImpl @Inject constructor(private val dataSource: DataSource) :
     PreferenceRepository {
 
-    override fun getNumber(): Int {
-        val number = dataSource.getNumber()
-        if (number != NUMBER_DEFAULT) {
-            return number
-        } else throw Exception()
-    }
+    override fun getNumber(): Int = dataSource.number
 
     override fun setNumber(number: Int) {
-        dataSource.setNumber(number)
+        dataSource.number = number
     }
 
-    companion object {
-        const val NUMBER_DEFAULT = 0
-    }
 }
