@@ -1,9 +1,9 @@
 package com.heartoracle.sport.student.feature.splash.di
 
 import com.heartoracle.sport.student.core.dagger.scope.ActivityScope
-import com.heartoracle.sport.student.core.domain.repository.PreferenceRepository
-import com.heartoracle.sport.student.core.domain.usecase.get.GetNumberUseCase
-import com.heartoracle.sport.student.core.domain.usecase.get.GetNumberUseCaseImpl
+import com.heartoracle.sport.student.core.domain.repository.preference.PreferenceRepository
+import com.heartoracle.sport.student.core.domain.usecase.preference.get.GetNumberUseCase
+import com.heartoracle.sport.student.core.domain.usecase.preference.get.GetNumberUseCaseImpl
 import dagger.Module
 import dagger.Provides
 

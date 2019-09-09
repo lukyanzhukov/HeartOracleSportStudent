@@ -1,6 +1,6 @@
-package com.heartoracle.sport.student.core.domain.usecase.get
+package com.heartoracle.sport.student.core.domain.usecase.preference.get
 
-import com.heartoracle.sport.student.core.domain.repository.PreferenceRepository
+import com.heartoracle.sport.student.core.domain.repository.preference.PreferenceRepository
 import javax.inject.Inject
 
 class GetNumberUseCaseImpl @Inject constructor(private val repository: PreferenceRepository) :

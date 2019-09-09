@@ -3,7 +3,7 @@ package com.heartoracle.sport.student.core.data
 import android.content.SharedPreferences
 import javax.inject.Inject
 
-class DataSource @Inject constructor(private val preferences: SharedPreferences) {
+class PreferenceDataSource @Inject constructor(private val preferences: SharedPreferences) {
 
     var number: Int
         get() = preferences.getInt(

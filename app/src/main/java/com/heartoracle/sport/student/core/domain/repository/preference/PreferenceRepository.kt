@@ -1,4 +1,4 @@
-package com.heartoracle.sport.student.core.domain.repository
+package com.heartoracle.sport.student.core.domain.repository.preference
 
 interface PreferenceRepository {
     fun getNumber() : Int
