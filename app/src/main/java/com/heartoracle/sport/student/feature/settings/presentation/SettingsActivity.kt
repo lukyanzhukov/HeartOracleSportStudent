@@ -20,7 +20,7 @@ class SettingsActivity :
     @Inject
     override lateinit var viewModel: SettingsViewModel
 
-    override val layoutId = R.layout.activity_splash
+    override val layoutId = R.layout.activity_settings
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

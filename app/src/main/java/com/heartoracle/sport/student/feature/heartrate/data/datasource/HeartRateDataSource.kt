@@ -1,4 +1,4 @@
-package com.heartoracle.sport.student.core.data
+package com.heartoracle.sport.student.feature.heartrate.data.datasource
 
 import android.content.Context
 import android.hardware.Sensor
@@ -14,10 +14,11 @@ import io.reactivex.Flowable
 import io.reactivex.schedulers.Schedulers
 
 
-class HRDataSource @Inject constructor(
+class HeartRateDataSource @Inject constructor(
     context: Context,
     sensor: Sensor
 ) {
+    //TODO переделать на функцию и назвать более осмысленно типа getValue
     val measureFlowable: Flowable<RxSensorEvent> = RxSensor
         .sensorEvent(context, sensor, SENSOR_DELAY_FASTEST)
         .subscribeOn(Schedulers.computation())

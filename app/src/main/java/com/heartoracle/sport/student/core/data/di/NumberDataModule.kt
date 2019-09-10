@@ -8,7 +8,7 @@ import dagger.Module
 import dagger.Provides
 
 @Module
-class PreferenceDataModule {
+class NumberDataModule {
 
     @Provides
     fun provideDataSource(preferences: SharedPreferences): PreferenceDataSource =
@@ -16,7 +16,5 @@ class PreferenceDataModule {
 
     @Provides
     fun provideRepository(preferenceDataSource: PreferenceDataSource): PreferenceRepository =
-        PreferenceRepositoryImpl(
-            preferenceDataSource
-        )
+        PreferenceRepositoryImpl(preferenceDataSource)
 }

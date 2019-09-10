@@ -2,10 +2,10 @@ package com.heartoracle.sport.student.feature.settings.di
 
 import com.heartoracle.sport.student.core.dagger.scope.ActivityScope
 import com.heartoracle.sport.student.core.domain.repository.preference.PreferenceRepository
-import com.heartoracle.sport.student.core.domain.usecase.preference.get.GetNumberUseCase
-import com.heartoracle.sport.student.core.domain.usecase.preference.get.GetNumberUseCaseImpl
-import com.heartoracle.sport.student.core.domain.usecase.preference.set.SetNumberUseCase
-import com.heartoracle.sport.student.core.domain.usecase.preference.set.SetNumberUseCaseImpl
+import com.heartoracle.sport.student.core.domain.usecase.number.get.GetNumberUseCase
+import com.heartoracle.sport.student.core.domain.usecase.number.get.GetNumberUseCaseImpl
+import com.heartoracle.sport.student.core.domain.usecase.number.set.SetNumberUseCase
+import com.heartoracle.sport.student.core.domain.usecase.number.set.SetNumberUseCaseImpl
 import dagger.Module
 import dagger.Provides
 

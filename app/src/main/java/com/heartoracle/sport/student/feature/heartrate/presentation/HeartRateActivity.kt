@@ -1,4 +1,4 @@
-package com.heartoracle.sport.student.feature.measure.presentation
+package com.heartoracle.sport.student.feature.heartrate.presentation
 
 import android.os.Bundle
 import com.heartoracle.sport.student.BR
@@ -8,18 +8,20 @@ import com.heartoracle.sport.student.databinding.ActivityMeasureBinding
 import javax.inject.Inject
 
 
-class MeasureActivity :
-    EventsActivity<ActivityMeasureBinding, MeasureViewModel, MeasureViewModel.EventsListener>(),
-    MeasureViewModel.EventsListener {
+class HeartRateActivity :
+    EventsActivity<ActivityMeasureBinding, HeartRateViewModel, HeartRateViewModel.EventsListener>(),
+    HeartRateViewModel.EventsListener {
 
     override fun nextActivity() {
 
     }
 
-    override val eventsListener: MeasureViewModel.EventsListener = this
+    override val eventsListener: HeartRateViewModel.EventsListener = this
+
     override val viewModelVariableId: Int = BR.viewModel
+
     @Inject
-    override lateinit var viewModel: MeasureViewModel
+    override lateinit var viewModel: HeartRateViewModel
 
     override val layoutId = R.layout.activity_measure
 

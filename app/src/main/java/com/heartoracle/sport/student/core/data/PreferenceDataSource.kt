@@ -6,10 +6,7 @@ import javax.inject.Inject
 class PreferenceDataSource @Inject constructor(private val preferences: SharedPreferences) {
 
     var number: Int
-        get() = preferences.getInt(
-            NUMBER_KEY,
-            NUMBER_DEFAULT
-        )
+        get() = preferences.getInt(NUMBER_KEY, NUMBER_DEFAULT)
         set(value) {
             preferences.edit().putInt(NUMBER_KEY, value).apply()
         }

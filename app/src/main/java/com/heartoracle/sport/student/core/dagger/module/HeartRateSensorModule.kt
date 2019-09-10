@@ -8,7 +8,7 @@ import dagger.Module
 import dagger.Provides
 
 @Module
-class HRSensorModule {
+class HeartRateSensorModule {
 
     @Provides
     fun provideSensorManager(context: Context): SensorManager =
