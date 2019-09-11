@@ -13,20 +13,27 @@ import io.reactivex.BackpressureOverflowStrategy
 import io.reactivex.Flowable
 import io.reactivex.schedulers.Schedulers
 
+interface HeartRateDataSource {
+    fun getHeartRate(): Flowable<RxSensorEvent>
+}
 
-class HeartRateDataSource @Inject constructor(
-    context: Context,
-    sensor: Sensor
-) {
-    //TODO переделать на функцию и назвать более осмысленно типа getValue
-    val measureFlowable: Flowable<RxSensorEvent> = RxSensor
+class HeartRateDataSourceImpl @Inject constructor(
+    val context: Context,
+    val sensor: Sensor
+) : HeartRateDataSource {
+    override fun getHeartRate(): Flowable<RxSensorEvent> = RxSensor
         .sensorEvent(context, sensor, SENSOR_DELAY_FASTEST)
         .subscribeOn(Schedulers.computation())
         .filter(RxSensorFilter.minAccuracy(SensorManager.SENSOR_STATUS_ACCURACY_MEDIUM))
         .onBackpressureBuffer(
-            128,
-            { error("error") }, BackpressureOverflowStrategy.DROP_LATEST
+            BUFFER_CAPACITY,
+            {}, BackpressureOverflowStrategy.DROP_LATEST
         )
         .distinctUntilChanged(RxSensorFilter.uniqueEventValues())
-        .compose(RxSensorTransformer.lowPassFilter(0.2F))
+        .compose(RxSensorTransformer.lowPassFilter(LPF_SETTINGS))
+
+    companion object {
+        const val BUFFER_CAPACITY = 128L
+        const val LPF_SETTINGS = 0.2F
+    }
 }

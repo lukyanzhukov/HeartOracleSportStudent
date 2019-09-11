@@ -7,11 +7,12 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import javax.inject.Inject
 
 interface GetHeartRateUseCase {
-    val flowable: Flowable<RxSensorEvent>
+    fun getHeartRate(): Flowable<RxSensorEvent>
 }
 
 class GetHeartRateUseCaseImpl @Inject constructor(private val repository: HeartRateRepository) :
     GetHeartRateUseCase {
-    override val flowable: Flowable<RxSensorEvent>
-        get() = repository.getHeartRate().observeOn(AndroidSchedulers.mainThread())
+    override fun getHeartRate(): Flowable<RxSensorEvent> =
+        repository.getHeartRate().observeOn(AndroidSchedulers.mainThread())
+
 }

@@ -20,7 +20,7 @@ class HeartRateViewModel @Inject constructor(
 
     @SuppressLint("CheckResult")
     fun getHeartRate() {
-        getUseCase.flowable.subscribe {
+        getUseCase.getHeartRate().subscribe {
             it.values.forEach {
                 heartRate.value = heartRate.value + it.toString()
             }
