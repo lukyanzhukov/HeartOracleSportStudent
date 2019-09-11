@@ -1,11 +1,12 @@
-package com.heartoracle.sport.student.core.data
+package com.heartoracle.sport.student.feature.settings.data.datasource
 
 import android.content.SharedPreferences
 import javax.inject.Inject
 
-class PreferenceDataSource @Inject constructor(private val preferences: SharedPreferences) {
+class NumberDataSourceImpl @Inject constructor(private val preferences: SharedPreferences) :
+    NumberDataSource {
 
-    var number: Int
+    override var number: Int
         get() = preferences.getInt(NUMBER_KEY, NUMBER_DEFAULT)
         set(value) {
             preferences.edit().putInt(NUMBER_KEY, value).apply()
@@ -15,4 +16,8 @@ class PreferenceDataSource @Inject constructor(private val preferences: SharedPr
         const val NUMBER_KEY = "number"
         const val NUMBER_DEFAULT = -1
     }
+}
+
+interface NumberDataSource {
+    var number: Int
 }

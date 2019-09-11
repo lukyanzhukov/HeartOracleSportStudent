@@ -18,7 +18,7 @@ class SettingsViewModel @Inject constructor(
     val number = MutableLiveData<String>()
 
     init {
-        number.value = getUseCase.value.toString()
+        number.value = getUseCase.number.toString()
     }
 
     interface EventsListener {

@@ -1,12 +1,16 @@
 package com.heartoracle.sport.student.core.domain.usecase.number.set
 
-import com.heartoracle.sport.student.core.domain.repository.preference.PreferenceRepository
+import com.heartoracle.sport.student.feature.settings.data.repository.NumberRepository
 import javax.inject.Inject
 
-class SetNumberUseCaseImpl @Inject constructor(private val repository: PreferenceRepository) :
+class SetNumberUseCaseImpl @Inject constructor(private val repository: NumberRepository) :
     SetNumberUseCase {
     override var number: Int = repository.getNumber()
         set(value) {
             repository.setNumber(value)
         }
+}
+
+interface SetNumberUseCase {
+    var number: Int
 }

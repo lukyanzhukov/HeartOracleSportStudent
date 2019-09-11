@@ -1,25 +1,22 @@
-package com.heartoracle.sport.student.feature.settings.di
+package com.heartoracle.sport.student.feature.settings.domain.dagger
 
-import com.heartoracle.sport.student.core.dagger.scope.ActivityScope
-import com.heartoracle.sport.student.core.domain.repository.preference.PreferenceRepository
 import com.heartoracle.sport.student.core.domain.usecase.number.get.GetNumberUseCase
 import com.heartoracle.sport.student.core.domain.usecase.number.get.GetNumberUseCaseImpl
 import com.heartoracle.sport.student.core.domain.usecase.number.set.SetNumberUseCase
 import com.heartoracle.sport.student.core.domain.usecase.number.set.SetNumberUseCaseImpl
+import com.heartoracle.sport.student.feature.settings.data.repository.NumberRepository
+import com.heartoracle.sport.student.feature.settings.data.repository.dagger.NumberRepositoryModule
 import dagger.Module
 import dagger.Provides
 
-@Module
-class SettingsModule {
+@Module(includes = [NumberRepositoryModule::class])
+class NumberUseCaseModule {
 
     @Provides
-    @ActivityScope
-    fun providePreferenceGetUseCase(repository: PreferenceRepository): GetNumberUseCase =
+    fun provideGetNumberUseCase(repository: NumberRepository): GetNumberUseCase =
         GetNumberUseCaseImpl(repository)
 
     @Provides
-    @ActivityScope
-    fun providePreferenceSetUseCase(repository: PreferenceRepository): SetNumberUseCase =
+    fun provideSetNumberUseCase(repository: NumberRepository): SetNumberUseCase =
         SetNumberUseCaseImpl(repository)
-
 }
