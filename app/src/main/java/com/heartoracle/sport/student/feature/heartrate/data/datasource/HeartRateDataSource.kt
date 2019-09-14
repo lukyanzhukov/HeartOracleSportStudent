@@ -24,7 +24,7 @@ class HeartRateDataSourceImpl @Inject constructor(
     override fun getHeartRate(): Flowable<RxSensorEvent> = RxSensor
         .sensorEvent(context, sensor, SENSOR_DELAY_FASTEST)
         .subscribeOn(Schedulers.computation())
-        .filter(RxSensorFilter.minAccuracy(SensorManager.SENSOR_STATUS_ACCURACY_MEDIUM))
+        .filter(RxSensorFilter.minAccuracy(SensorManager.SENSOR_STATUS_ACCURACY_HIGH))
         .onBackpressureBuffer(
             BUFFER_CAPACITY,
             {}, BackpressureOverflowStrategy.DROP_LATEST

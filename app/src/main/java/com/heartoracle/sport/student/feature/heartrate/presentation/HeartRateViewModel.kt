@@ -12,28 +12,22 @@ class HeartRateViewModel @Inject constructor(
     private val getUseCase: GetHeartRateUseCase
 ) : BaseViewModel(), EventsDispatcherOwner<HeartRateViewModel.EventsListener> {
     override val eventsDispatcher: EventsDispatcher<EventsListener> = EventsDispatcher()
-    val heartRate = MutableLiveData<String>()
+    val measureHeartRate = MutableLiveData<String>()
+    private val heartRateList = arrayListOf<Int>()
 
     init {
-        getHeartRate()
     }
 
     @SuppressLint("CheckResult")
-    fun getHeartRate() {
+    private fun getHeartRate() {
         getUseCase.getHeartRate().subscribe {
-            it.values.forEach {
-                heartRate.value = heartRate.value + it.toString()
-            }
-        }
-    }
-
-    private fun nextActivity() {
-        eventsDispatcher.dispatchEvent {
-            this@HeartRateViewModel.nextActivity()
+            measureHeartRate.value = it.toString()
+            eventsDispatcher.dispatchEvent { toMeasureImage() }
         }
     }
 
     interface EventsListener {
-        fun nextActivity()
+        fun toMeasureImage()
+        fun toOsmImage()
     }
 }
