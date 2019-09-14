@@ -6,10 +6,14 @@ import com.heartoracle.sport.student.core.presentation.eventsdispatcher.EventsDi
 import com.heartoracle.sport.student.core.presentation.eventsdispatcher.EventsDispatcherOwner
 import com.heartoracle.sport.student.core.presentation.viewmodel.BaseViewModel
 import com.heartoracle.sport.student.feature.heartrate.domain.usecase.GetHeartRateUseCase
+import com.heartoracle.sport.student.feature.heartrate.domain.usecase.GetSitHeartRateUseCase
+import com.heartoracle.sport.student.feature.heartrate.domain.usecase.GetStandHeartRateUseCase
 import javax.inject.Inject
 
 class HeartRateViewModel @Inject constructor(
-    private val getUseCase: GetHeartRateUseCase
+    private val getHeartRateUseCase: GetHeartRateUseCase,
+    private val getSitHeartRateUseCase: GetSitHeartRateUseCase,
+    private val getStandHeartRateUseCase: GetStandHeartRateUseCase
 ) : BaseViewModel(), EventsDispatcherOwner<HeartRateViewModel.EventsListener> {
     override val eventsDispatcher: EventsDispatcher<EventsListener> = EventsDispatcher()
     val measureHeartRate = MutableLiveData<String>()
@@ -20,7 +24,7 @@ class HeartRateViewModel @Inject constructor(
 
     @SuppressLint("CheckResult")
     private fun getHeartRate() {
-        getUseCase.getHeartRate().subscribe {
+        getHeartRateUseCase.getHeartRate().subscribe {
             measureHeartRate.value = it.toString()
             eventsDispatcher.dispatchEvent { toMeasureImage() }
         }
