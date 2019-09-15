@@ -12,14 +12,19 @@ import javax.inject.Inject
 class HeartRateActivity :
     EventsActivity<ActivityHeartrateBinding, HeartRateViewModel, HeartRateViewModel.EventsListener>(),
     HeartRateViewModel.EventsListener {
-
-    override fun toOsmImage() {
+    override fun toResult() {
         measureView.visibility = View.GONE
-        osmView.visibility = View.VISIBLE
+        resultView.visibility = View.VISIBLE
     }
 
-    override fun toMeasureImage() {
-        osmView.visibility = View.GONE
+    override fun toStandHeartRate() {
+        measureView.visibility = View.GONE
+        imageOsm.setImageResource(R.drawable.ic_stand)
+        imageOsm.visibility = View.VISIBLE
+    }
+
+    override fun toMeasure() {
+        imageOsm.visibility = View.GONE
         measureView.visibility = View.VISIBLE
     }
 

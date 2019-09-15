@@ -14,58 +14,39 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+
+        <ImageView
+            android:id="@+id/imageOsm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            app:srcCompat="@drawable/ic_sit" />
+
         <LinearLayout
-            android:id="@+id/osmView"
+            android:id="@+id/resultView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:gravity="center"
             android:orientation="vertical"
-            android:visibility="visible"
-            tools:context=".feature.heartrate.presentation.HeartRateActivity">
+            android:visibility="gone">
 
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="10dp"
-                android:layout_weight="1">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:textSize="188sp" />
 
-                <ImageView
-                    android:id="@+id/imageSit"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    app:srcCompat="@drawable/ic_sit" />
-
-<!--                <TextView-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_gravity="center"-->
-<!--                    android:text="@={viewModel.}"-->
-<!--                    android:textSize="96sp" />-->
-            </FrameLayout>
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="7dp"
-                app:srcCompat="@drawable/divider" />
-
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="10dp"
-                android:layout_weight="1">
-
-<!--                <TextView-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_gravity="center"-->
-<!--                    android:text="@={viewModel.}"-->
-<!--                    android:textSize="96sp" />-->
-
-                <ImageView
-                    android:id="@+id/imageStand"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    app:srcCompat="@drawable/ic_stand" />
-            </FrameLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:textSize="96sp" />
         </LinearLayout>
 
         <LinearLayout

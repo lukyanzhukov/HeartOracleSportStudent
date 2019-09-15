@@ -45,14 +45,14 @@ class HeartRateRepositoryImpl @Inject constructor(private val dataSource: HeartR
         return listValues.getMode()
     }
 
-    private fun transformStandHeartRate(listEvent: List<RxSensorEvent>): Int? {
+    private fun transformStandHeartRate(listEvent: List<RxSensorEvent>): Int {
         val listValues = arrayListOf<Int>()
         listEvent.forEach { event ->
             event.values.forEach { value ->
                 listValues.add(value.toInt())
             }
         }
-        return listValues.max()
+        return listValues.max() ?: 0
     }
 
 
