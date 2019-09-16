@@ -8,7 +8,7 @@ import com.heartoracle.sport.student.feature.settings.presentation.SettingsActiv
 class SplashActivity : AppCompatActivity() {
     override fun onPostResume() {
         super.onPostResume()
-        startActivity(Intent(this, HeartRateActivity::class.java))
+        startActivity(Intent(this, SettingsActivity::class.java))
         finish()
     }
 }

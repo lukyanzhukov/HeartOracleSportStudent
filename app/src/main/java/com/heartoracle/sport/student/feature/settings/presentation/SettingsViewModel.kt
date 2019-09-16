@@ -16,6 +16,7 @@ class SettingsViewModel @Inject constructor(
     override val eventsDispatcher: EventsDispatcher<EventsListener> = EventsDispatcher()
 
     init {
+        eventsDispatcher.dispatchEvent { requestPermissions() }
         getNumber()
     }
 
@@ -35,5 +36,6 @@ class SettingsViewModel @Inject constructor(
 
     interface EventsListener {
         fun getNumber(number: Int)
+        fun requestPermissions()
     }
 }
