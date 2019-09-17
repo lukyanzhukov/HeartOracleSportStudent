@@ -1,6 +1,5 @@
 package com.heartoracle.sport.student.feature.settings.presentation
 
-import androidx.lifecycle.LifecycleObserver
 import com.heartoracle.sport.student.core.domain.usecase.number.get.GetNumberUseCase
 import com.heartoracle.sport.student.core.domain.usecase.number.set.SetNumberUseCase
 import org.junit.After
