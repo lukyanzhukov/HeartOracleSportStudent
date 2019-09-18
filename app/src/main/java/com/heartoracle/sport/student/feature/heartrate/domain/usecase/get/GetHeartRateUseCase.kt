@@ -1,4 +1,4 @@
-package com.heartoracle.sport.student.feature.heartrate.domain.usecase
+package com.heartoracle.sport.student.feature.heartrate.domain.usecase.get
 
 import com.heartoracle.sport.student.feature.heartrate.data.repository.HeartRateRepository
 import io.reactivex.Flowable

@@ -11,7 +11,8 @@ import dagger.android.support.AndroidSupportInjectionModule
         PreferenceModule::class,
         HeartRateSensorModule::class,
         HeartRateModule::class,
-        SettingsModule::class
+        SettingsModule::class,
+        FirebaseDatabaseModule::class
     ]
 )
 interface ApplicationModule
