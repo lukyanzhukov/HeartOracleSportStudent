@@ -1,7 +1,9 @@
 package com.heartoracle.sport.student.feature.heartrate.presentation.dagger
 
 import androidx.lifecycle.ViewModelProvider
+import com.heartoracle.sport.student.core.domain.usecase.number.get.GetNumberUseCase
 import com.heartoracle.sport.student.core.presentation.viewmodel.ViewModelFactory
+import com.heartoracle.sport.student.feature.heartrate.domain.OsmCalculator
 import com.heartoracle.sport.student.feature.heartrate.domain.usecase.SendToFirebaseUseCase
 import com.heartoracle.sport.student.feature.heartrate.domain.usecase.get.GetHeartRateUseCase
 import com.heartoracle.sport.student.feature.heartrate.domain.usecase.get.GetSitHeartRateUseCase
@@ -20,13 +22,17 @@ class HeartRateActivityModule {
         getHeartRateUseCase: GetHeartRateUseCase,
         getSitHeartRateUseCase: GetSitHeartRateUseCase,
         getStandHeartRateUseCase: GetStandHeartRateUseCase,
-        sendToFirebaseUseCase: SendToFirebaseUseCase
+        sendToFirebaseUseCase: SendToFirebaseUseCase,
+        getNumberUseCase:  GetNumberUseCase,
+        osmCalculator: OsmCalculator
     ): HeartRateViewModel = ViewModelFactory {
         HeartRateViewModel(
             getHeartRateUseCase,
             getSitHeartRateUseCase,
             getStandHeartRateUseCase,
-            sendToFirebaseUseCase
+            sendToFirebaseUseCase,
+            getNumberUseCase,
+            osmCalculator
         )
     }.let { viewModelFactory ->
         ViewModelProvider(context, viewModelFactory)[HeartRateViewModel::class.java]

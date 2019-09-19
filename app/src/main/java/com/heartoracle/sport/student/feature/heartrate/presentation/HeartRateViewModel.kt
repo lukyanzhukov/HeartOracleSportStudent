@@ -3,9 +3,11 @@ package com.heartoracle.sport.student.feature.heartrate.presentation
 import android.annotation.SuppressLint
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
+import com.heartoracle.sport.student.core.domain.usecase.number.get.GetNumberUseCase
 import com.heartoracle.sport.student.core.presentation.eventsdispatcher.EventsDispatcher
 import com.heartoracle.sport.student.core.presentation.eventsdispatcher.EventsDispatcherOwner
 import com.heartoracle.sport.student.core.presentation.viewmodel.BaseViewModel
+import com.heartoracle.sport.student.feature.heartrate.domain.OsmCalculator
 import com.heartoracle.sport.student.feature.heartrate.domain.model.OsmRes
 import com.heartoracle.sport.student.feature.heartrate.domain.usecase.SendToFirebaseUseCase
 import com.heartoracle.sport.student.feature.heartrate.domain.usecase.get.GetHeartRateUseCase
@@ -20,7 +22,9 @@ class HeartRateViewModel @Inject constructor(
     private val getHeartRateUseCase: GetHeartRateUseCase,
     private val getSitHeartRateUseCase: GetSitHeartRateUseCase,
     private val getStandHeartRateUseCase: GetStandHeartRateUseCase,
-    private val sendToFirebaseUseCase: SendToFirebaseUseCase
+    private val sendToFirebaseUseCase: SendToFirebaseUseCase,
+    private val getNumberUseCase: GetNumberUseCase,
+    private val osmCalculator: OsmCalculator
 ) : BaseViewModel(), EventsDispatcherOwner<HeartRateViewModel.EventsListener> {
     override val eventsDispatcher: EventsDispatcher<EventsListener> = EventsDispatcher()
 
@@ -56,7 +60,7 @@ class HeartRateViewModel @Inject constructor(
             eventsDispatcher.dispatchEvent { toStandHeartRate() }
             Single.timer(2, TimeUnit.SECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe { it ->
+                .subscribe { _ ->
                     startStandMeasure()
                 }
         }
@@ -73,21 +77,11 @@ class HeartRateViewModel @Inject constructor(
     }
 
     private fun calculateResult() {
-        val score =
-            (14.5 - 0.5 * ((sitHeartRate) - 40) / 3.5 - ((standHeartRate - sitHeartRate)) / 2.23 * 0.5).toFloat()
-        this.score.value = score.toString()
-        var sign = ""
-        if (score >= 7.5) {
-            sign = "I"
-        } else if (score >= 5 && score < 7.5) {
-            sign = "II"
-        } else if (score >= 2.5 && score < 5) {
-            sign = "III"
-        } else if (score < 2.5) {
-            sign = "IV"
-        }
-        zone.value = sign
-        sendToFirebase(sign, score)
+        val osmScore = osmCalculator.calculateScore(sitHeartRate, standHeartRate)
+        val osmZone = osmCalculator.calculateZone(osmScore)
+        score.value = osmScore.toString()
+        zone.value = osmZone
+        sendToFirebase(osmZone, osmScore)
     }
 
     @SuppressLint("CheckResult")
@@ -97,7 +91,8 @@ class HeartRateViewModel @Inject constructor(
                 sitHeartRate,
                 standHeartRate,
                 zone,
-                score
+                score,
+                getNumberUseCase.number
             )
         ).subscribe {
             Log.i("TAG", "success")
@@ -109,4 +104,13 @@ class HeartRateViewModel @Inject constructor(
         fun toMeasure()
         fun toStandHeartRate()
     }
+
+    companion object {
+        const val EMPTY_SIGN = ""
+        const val FIRST_SIGN = "I"
+        const val SECOND_SIGN = "II"
+        const val THIRD_SIGN = "III"
+        const val FOURTH_SIGN = "IV"
+    }
+
 }
