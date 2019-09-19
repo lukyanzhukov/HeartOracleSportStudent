@@ -6,17 +6,16 @@ import com.heartoracle.sport.student.core.domain.usecase.number.set.SetNumberUse
 import com.heartoracle.sport.student.core.domain.usecase.number.set.SetNumberUseCaseImpl
 import com.heartoracle.sport.student.feature.settings.data.repository.NumberRepository
 import com.heartoracle.sport.student.feature.settings.data.repository.dagger.NumberRepositoryModule
+import dagger.Binds
 import dagger.Module
 import dagger.Provides
 
 @Module(includes = [NumberRepositoryModule::class])
-class NumberUseCaseModule {
+interface NumberUseCaseModule {
 
-    @Provides
-    fun provideGetNumberUseCase(repository: NumberRepository): GetNumberUseCase =
-        GetNumberUseCaseImpl(repository)
+    @Binds
+    fun bindGetNumberUseCase(impl: GetNumberUseCaseImpl): GetNumberUseCase
 
-    @Provides
-    fun provideSetNumberUseCase(repository: NumberRepository): SetNumberUseCase =
-        SetNumberUseCaseImpl(repository)
+    @Binds
+    fun bindSetNumberUseCase(impl: SetNumberUseCaseImpl): SetNumberUseCase
 }

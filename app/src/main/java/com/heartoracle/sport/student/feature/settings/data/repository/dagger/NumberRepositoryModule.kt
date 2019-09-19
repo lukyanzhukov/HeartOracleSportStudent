@@ -4,13 +4,13 @@ import com.heartoracle.sport.student.feature.settings.data.repository.NumberRepo
 import com.heartoracle.sport.student.feature.settings.data.repository.NumberRepositoryImpl
 import com.heartoracle.sport.student.feature.settings.data.datasource.NumberDataSource
 import com.heartoracle.sport.student.feature.settings.data.datasource.dagger.NumberDataSourceModule
+import dagger.Binds
 import dagger.Module
 import dagger.Provides
 
 @Module(includes = [NumberDataSourceModule::class])
-class NumberRepositoryModule {
+interface NumberRepositoryModule {
 
-    @Provides
-    fun provideRepository(numberDataSource: NumberDataSource): NumberRepository =
-        NumberRepositoryImpl(numberDataSource)
+    @Binds
+    fun bindRepository(impl: NumberRepositoryImpl): NumberRepository
 }
