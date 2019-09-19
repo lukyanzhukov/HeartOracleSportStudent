@@ -1,6 +1,5 @@
 package com.heartoracle.sport.student.feature.settings.presentation
 
-import androidx.lifecycle.MutableLiveData
 import com.heartoracle.sport.student.core.domain.usecase.number.get.GetNumberUseCase
 import com.heartoracle.sport.student.core.domain.usecase.number.set.SetNumberUseCase
 import com.heartoracle.sport.student.core.presentation.eventsdispatcher.EventsDispatcher
@@ -15,13 +14,28 @@ class SettingsViewModel @Inject constructor(
     BaseViewModel(),
     EventsDispatcherOwner<SettingsViewModel.EventsListener> {
     override val eventsDispatcher: EventsDispatcher<EventsListener> = EventsDispatcher()
-    val number = MutableLiveData<String>()
 
     init {
-        number.value = getUseCase.number.toString()
+        eventsDispatcher.dispatchEvent { requestPermissions() }
+        getNumber()
+    }
+
+    private fun getNumber() {
+        eventsDispatcher.dispatchEvent {
+            var number = this@SettingsViewModel.getUseCase.number
+            if (number == -1) {
+                number = 1
+            }
+            getNumber(number)
+        }
+    }
+
+    fun setNumber(number: Int) {
+        setUseCase.number = number
     }
 
     interface EventsListener {
-        fun nextActivity()
+        fun getNumber(number: Int)
+        fun requestPermissions()
     }
 }

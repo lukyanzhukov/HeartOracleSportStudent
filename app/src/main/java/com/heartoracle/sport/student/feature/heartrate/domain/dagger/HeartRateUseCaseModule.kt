@@ -1,16 +1,19 @@
 package com.heartoracle.sport.student.feature.heartrate.domain.dagger
 
-import com.heartoracle.sport.student.feature.heartrate.data.repository.HeartRateRepositoryImpl
 import com.heartoracle.sport.student.feature.heartrate.data.repository.dagger.HeartRateRepositoryModule
-import com.heartoracle.sport.student.feature.heartrate.domain.usecase.GetHeartRateUseCase
-import com.heartoracle.sport.student.feature.heartrate.domain.usecase.GetHeartRateUseCaseImpl
+import com.heartoracle.sport.student.feature.heartrate.domain.usecase.get.*
+import dagger.Binds
 import dagger.Module
-import dagger.Provides
 
 @Module(includes = [HeartRateRepositoryModule::class])
-class HeartRateUseCaseModule {
+interface HeartRateUseCaseModule {
 
-    @Provides
-    fun provideGetHeartRateUseCase(repository: HeartRateRepositoryImpl): GetHeartRateUseCase =
-        GetHeartRateUseCaseImpl(repository)
+    @Binds
+    fun bindGetHeartRateUseCase(impl: GetHeartRateUseCaseImpl): GetHeartRateUseCase
+
+    @Binds
+    fun bindGetSitHeartRateUseCase(impl: GetSitHeartRateUseCaseImpl): GetSitHeartRateUseCase
+
+    @Binds
+    fun bindGetStandHeartRateUseCase(impl: GetStandHeartRateUseCaseImpl): GetStandHeartRateUseCase
 }
