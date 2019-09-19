@@ -105,12 +105,4 @@ class HeartRateViewModel @Inject constructor(
         fun toStandHeartRate()
     }
 
-    companion object {
-        const val EMPTY_SIGN = ""
-        const val FIRST_SIGN = "I"
-        const val SECOND_SIGN = "II"
-        const val THIRD_SIGN = "III"
-        const val FOURTH_SIGN = "IV"
-    }
-
 }
