@@ -2,8 +2,10 @@ package com.heartoracle.sport.student.feature.settings.presentation
 
 import android.Manifest
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import com.heartoracle.sport.student.BR
 import com.heartoracle.sport.student.R
 import com.heartoracle.sport.student.core.presentation.activity.EventsActivity
@@ -37,6 +39,7 @@ class SettingsActivity :
         setupPicker()
     }
 
+    @RequiresApi(Build.VERSION_CODES.P)
     override fun requestPermissions() {
         Dexter.withActivity(this)
             .withPermissions(
@@ -45,7 +48,7 @@ class SettingsActivity :
                 Manifest.permission.INTERNET
             ).withListener(object : MultiplePermissionsListener {
                 override fun onPermissionsChecked(report: MultiplePermissionsReport) {
-                    if (report.deniedPermissionResponses.isEmpty().not()) {
+                    if (report.deniedPermissionResponses.isEmpty()) {
                         showPermissionDialog()
                     }
                 }
@@ -64,7 +67,7 @@ class SettingsActivity :
     private fun setupPicker() {
         numberPicker.minValue = 1
         numberPicker.maxValue = 99
-        numberPicker.setOnValueChangedListener { picker, oldVal, newVal ->
+        numberPicker.setOnValueChangedListener { _, _, newVal ->
             viewModel.setNumber(newVal)
         }
         numberPicker.setOnLongClickListener {

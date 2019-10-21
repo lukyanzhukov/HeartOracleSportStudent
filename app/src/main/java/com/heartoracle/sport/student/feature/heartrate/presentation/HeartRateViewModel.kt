@@ -15,6 +15,7 @@ import com.heartoracle.sport.student.feature.heartrate.domain.usecase.get.GetSit
 import com.heartoracle.sport.student.feature.heartrate.domain.usecase.get.GetStandHeartRateUseCase
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.rxkotlin.addTo
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
@@ -48,7 +49,7 @@ class HeartRateViewModel @Inject constructor(
             if (it != 0 && isStandHeartRateChecked.not()) {
                 startSitMeasure()
             }
-        }
+        }.addTo(compositeDisposable)
     }
 
     @SuppressLint("CheckResult")
@@ -63,7 +64,7 @@ class HeartRateViewModel @Inject constructor(
                 .subscribe { _ ->
                     startStandMeasure()
                 }
-        }
+        }.addTo(compositeDisposable)
     }
 
     @SuppressLint("CheckResult")
@@ -73,10 +74,11 @@ class HeartRateViewModel @Inject constructor(
             standHeartRate = value
             calculateResult()
             eventsDispatcher.dispatchEvent { toResult() }
-        }
+        }.addTo(compositeDisposable)
     }
 
     private fun calculateResult() {
+        compositeDisposable.dispose()
         val osmScore = osmCalculator.calculateScore(sitHeartRate, standHeartRate)
         val osmZone = osmCalculator.calculateZone(osmScore)
         score.value = osmScore.toString()
