@@ -1,6 +1,6 @@
 package com.heartoracle.sport.student.feature.settings.presentation
 
-import com.heartoracle.sport.student.core.domain.usecase.number.get.GetNumberUseCase
+import com.heartoracle.sport.student.feature.settings.domain.usecase.get.GetNumberUseCase
 import com.heartoracle.sport.student.core.domain.usecase.number.set.SetNumberUseCase
 import com.heartoracle.sport.student.core.presentation.eventsdispatcher.EventsDispatcher
 import com.heartoracle.sport.student.core.presentation.eventsdispatcher.EventsDispatcherOwner

@@ -1,7 +1,7 @@
 package com.heartoracle.sport.student.feature.heartrate.presentation.dagger
 
 import androidx.lifecycle.ViewModelProvider
-import com.heartoracle.sport.student.core.domain.usecase.number.get.GetNumberUseCase
+import com.heartoracle.sport.student.feature.settings.domain.usecase.get.GetNumberUseCase
 import com.heartoracle.sport.student.core.presentation.viewmodel.ViewModelFactory
 import com.heartoracle.sport.student.feature.heartrate.domain.OsmCalculator
 import com.heartoracle.sport.student.feature.heartrate.domain.usecase.SendToFirebaseUseCase
@@ -23,7 +23,7 @@ class HeartRateActivityModule {
         getSitHeartRateUseCase: GetSitHeartRateUseCase,
         getStandHeartRateUseCase: GetStandHeartRateUseCase,
         sendToFirebaseUseCase: SendToFirebaseUseCase,
-        getNumberUseCase:  GetNumberUseCase,
+        getNumberUseCase: GetNumberUseCase,
         osmCalculator: OsmCalculator
     ): HeartRateViewModel = ViewModelFactory {
         HeartRateViewModel(
