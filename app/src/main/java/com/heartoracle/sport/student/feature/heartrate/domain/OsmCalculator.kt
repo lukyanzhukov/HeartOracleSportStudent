@@ -1,5 +1,7 @@
 package com.heartoracle.sport.student.feature.heartrate.domain
 
+import kotlin.math.floor
+
 interface OsmCalculator {
     fun calculateScore(sitHeartRate: Int, standHeartRate: Int): Float
     fun calculateZone(score: Float): String
@@ -8,7 +10,10 @@ interface OsmCalculator {
 class OsmCalculatorImpl : OsmCalculator {
 
     override fun calculateScore(sitHeartRate: Int, standHeartRate: Int): Float {
-        return (14.5 - 0.5 * ((sitHeartRate) - 40) / 3.5 - ((standHeartRate - sitHeartRate)) / 2.23 * 0.5).toFloat()
+        return floor(
+            (14.5 - 0.5 * ((sitHeartRate) - 40) / 3.5 - ((standHeartRate - sitHeartRate)) / 2.23 * 0.5) * 100
+                    / 100.0
+        ).toFloat()
     }
 
     override fun calculateZone(score: Float): String {

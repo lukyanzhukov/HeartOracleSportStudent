@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Heart Oracle Sport</string>
     <string name="devider_color">#F65454</string>
-    <string name="heart_rate_text">уд. мин</string>
+    <string name="heart_rate_text">уд.\n мин</string>
     <string name="permission_dialog_text">Настройте разрешения в настройках</string>
 
 </resources>
