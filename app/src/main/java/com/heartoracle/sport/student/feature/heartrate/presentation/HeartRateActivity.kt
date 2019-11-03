@@ -19,9 +19,17 @@ class HeartRateActivity :
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
     }
 
+    override fun onBackPressed() {
+
+    }
+
     override fun toResult() {
         measureView.visibility = View.GONE
         resultView.visibility = View.VISIBLE
+        resultView.setOnLongClickListener {
+            finish()
+            true
+        }
     }
 
     override fun toStandHeartRate() {
