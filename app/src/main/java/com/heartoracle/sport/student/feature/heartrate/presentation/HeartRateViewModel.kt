@@ -3,7 +3,7 @@ package com.heartoracle.sport.student.feature.heartrate.presentation
 import android.annotation.SuppressLint
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
-import com.heartoracle.sport.student.core.domain.usecase.number.get.GetNumberUseCase
+import com.heartoracle.sport.student.feature.settings.domain.usecase.get.GetNumberUseCase
 import com.heartoracle.sport.student.core.presentation.eventsdispatcher.EventsDispatcher
 import com.heartoracle.sport.student.core.presentation.eventsdispatcher.EventsDispatcherOwner
 import com.heartoracle.sport.student.core.presentation.viewmodel.BaseViewModel

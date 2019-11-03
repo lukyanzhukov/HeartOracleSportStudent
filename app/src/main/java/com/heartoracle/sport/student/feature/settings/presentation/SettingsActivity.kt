@@ -1,7 +1,6 @@
 package com.heartoracle.sport.student.feature.settings.presentation
 
 import android.Manifest
-import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import com.heartoracle.sport.student.BR
@@ -42,10 +41,13 @@ class SettingsActivity :
             .withPermissions(
                 Manifest.permission.BODY_SENSORS,
                 Manifest.permission.FOREGROUND_SERVICE,
-                Manifest.permission.INTERNET
+                Manifest.permission.INTERNET,
+                Manifest.permission.WAKE_LOCK,
+                Manifest.permission.RECEIVE_BOOT_COMPLETED
+
             ).withListener(object : MultiplePermissionsListener {
                 override fun onPermissionsChecked(report: MultiplePermissionsReport) {
-                    if (report.deniedPermissionResponses.isEmpty().not()) {
+                    if (report.deniedPermissionResponses.isEmpty()) {
                         showPermissionDialog()
                     }
                 }

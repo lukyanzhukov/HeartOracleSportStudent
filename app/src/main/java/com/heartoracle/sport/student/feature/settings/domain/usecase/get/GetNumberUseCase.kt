@@ -1,4 +1,4 @@
-package com.heartoracle.sport.student.core.domain.usecase.number.get
+package com.heartoracle.sport.student.feature.settings.domain.usecase.get
 
 import com.heartoracle.sport.student.feature.settings.data.repository.NumberRepository
 import javax.inject.Inject
