@@ -16,8 +16,7 @@ class FirebaseDataSourceImpl @Inject constructor(private val databaseReference: 
     @SuppressLint("CheckResult")
     override fun sendToFirebase(res: OsmRes): Completable =
         Completable.create {
-            val key = databaseReference.child("test").push().key as String
-            databaseReference.child("test").child(key).setValue(
+            databaseReference.child("test").child(res.id.toString()).setValue(
                 res
             ) { databaseError, _ ->
                 if (it.isDisposed) {
