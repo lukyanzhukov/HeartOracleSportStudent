@@ -63,7 +63,6 @@ dependencies {
     implementation 'androidx.navigation:navigation-ui-ktx:2.1.0'
 
     implementation "com.karumi:dexter:5.0.0"
-    implementation 'com.gvillani:rxsensors:1.0'
 
     //firebase
     implementation 'com.google.firebase:firebase-messaging:20.0.0'

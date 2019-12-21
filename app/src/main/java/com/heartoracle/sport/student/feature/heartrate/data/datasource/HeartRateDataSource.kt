@@ -1,39 +1,50 @@
 package com.heartoracle.sport.student.feature.heartrate.data.datasource
 
-import android.content.Context
 import android.hardware.Sensor
+import android.hardware.SensorEvent
+import android.hardware.SensorEventListener
 import android.hardware.SensorManager
-import android.hardware.SensorManager.SENSOR_DELAY_FASTEST
-import javax.inject.Inject
-import com.gvillani.rxsensors.RxSensor
-import com.gvillani.rxsensors.RxSensorEvent
-import com.gvillani.rxsensors.RxSensorFilter
-import com.gvillani.rxsensors.RxSensorTransformer
-import io.reactivex.BackpressureOverflowStrategy
+import io.reactivex.BackpressureStrategy
 import io.reactivex.Flowable
+import io.reactivex.FlowableOnSubscribe
 import io.reactivex.schedulers.Schedulers
+import javax.inject.Inject
 
 interface HeartRateDataSource {
-    fun getHeartRate(): Flowable<RxSensorEvent>
+    fun getHeartRate(): Flowable<ArrayList<Int>>
 }
 
 class HeartRateDataSourceImpl @Inject constructor(
-    val context: Context,
-    val sensor: Sensor
+    private val sensor: Sensor,
+    private val sensorManager: SensorManager
 ) : HeartRateDataSource {
-    override fun getHeartRate(): Flowable<RxSensorEvent> = RxSensor
-        .sensorEvent(context, sensor, SENSOR_DELAY_FASTEST)
-        .subscribeOn(Schedulers.computation())
-        .filter(RxSensorFilter.minAccuracy(SensorManager.SENSOR_STATUS_ACCURACY_HIGH))
-        .onBackpressureBuffer(
-            BUFFER_CAPACITY,
-            {}, BackpressureOverflowStrategy.DROP_LATEST
-        )
-        .distinctUntilChanged(RxSensorFilter.uniqueEventValues())
-        .compose(RxSensorTransformer.lowPassFilter(LPF_SETTINGS))
 
-    companion object {
-        const val BUFFER_CAPACITY = 128L
-        const val LPF_SETTINGS = 0.2F
+    private var heartRateListener: SensorEventListener? = null
+
+    override fun getHeartRate(): Flowable<ArrayList<Int>> = Flowable.create(
+        FlowableOnSubscribe<ArrayList<Int>> {
+            heartRateListener = object : SensorEventListener {
+
+                override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {}
+
+                override fun onSensorChanged(event: SensorEvent?) {
+                    if (event != null) {
+                        if (event.sensor.type == Sensor.TYPE_HEART_RATE) {
+                            it.onNext(event.values.map {
+                                it.toInt()
+                            } as ArrayList<Int>)
+                        }
+                    }
+                }
+            }
+            sensorManager.registerListener(
+                heartRateListener,
+                sensor,
+                SensorManager.SENSOR_DELAY_FASTEST
+            )
+        },
+        BackpressureStrategy.LATEST
+    ).subscribeOn(Schedulers.io()).doOnCancel {
+        sensorManager.unregisterListener(heartRateListener, sensor)
     }
 }
