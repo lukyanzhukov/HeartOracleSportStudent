@@ -50,7 +50,7 @@ class SettingsActivity :
 
             ).withListener(object : MultiplePermissionsListener {
                 override fun onPermissionsChecked(report: MultiplePermissionsReport) {
-                    if (report.deniedPermissionResponses.isEmpty()) {
+                    if (report.deniedPermissionResponses.isNotEmpty()) {
                         showPermissionDialog()
                     }
                 }
